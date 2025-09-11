@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBackEnd.Api.Models;
 using ProjetoBackEnd.Api.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace ProjetoBackEnd.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ElderlyController : ControllerBase
+    public class VisitController : ControllerBase
     {
-        private readonly IElderlyService _service;
-        public ElderlyController(IElderlyService service) => _service = service;
+        private readonly IVisitService _service;
+        public VisitController(IVisitService service) => _service = service;
 
         [HttpGet]
         public async Task<IActionResult> GetAll() => Ok(await _service.GetAllAsync());
@@ -17,23 +18,23 @@ namespace ProjetoBackEnd.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var elderly = await _service.GetByIdAsync(id);
-            if (elderly == null) return NotFound();
-            return Ok(elderly);
+            var visit = await _service.GetByIdAsync(id);
+            if (visit == null) return NotFound();
+            return Ok(visit);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Elderly elderly)
+        public async Task<IActionResult> Create([FromBody] Visit visit)
         {
-            var created = await _service.CreateAsync(elderly);
+            var created = await _service.CreateAsync(visit);
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Elderly elderly)
+        public async Task<IActionResult> Update(int id, [FromBody] Visit visit)
         {
-            if (id != elderly.Id) return BadRequest();
-            await _service.UpdateAsync(elderly);
+            if (id != visit.Id) return BadRequest();
+            await _service.UpdateAsync(visit);
             return NoContent();
         }
 
