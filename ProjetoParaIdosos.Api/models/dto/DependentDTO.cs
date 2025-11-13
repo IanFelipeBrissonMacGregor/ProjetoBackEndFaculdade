@@ -7,6 +7,8 @@ namespace ProjetoBackEnd.Api.Models.DTOs
         public string HealthStatus { get; set; } = "Good";
         public string ImportantInfo { get; set; } = string.Empty;
         public string Summary { get; set; } = string.Empty;
+
         public int PartnerId { get; set; }
+        public int PlanId { get; set; }  
     }
 }

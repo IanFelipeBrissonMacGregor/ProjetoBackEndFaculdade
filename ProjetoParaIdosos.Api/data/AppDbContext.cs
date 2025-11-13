@@ -11,6 +11,7 @@ namespace ProjetoBackEnd.Api.Data
         public DbSet<Partner> Partners { get; set; } = null!;
         public DbSet<Dependent> Dependents { get; set; } = null!;
         public DbSet<Visit> Visits { get; set; } = null!;
+        public DbSet<Plan> Plans { get; set; } = null!;    // NOVO
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,12 +22,18 @@ namespace ProjetoBackEnd.Api.Data
                 .WithOne(d => d.Partner)
                 .HasForeignKey(d => d.PartnerId)
                 .OnDelete(DeleteBehavior.Cascade);
-                
+
             modelBuilder.Entity<Dependent>()
                 .HasMany(d => d.Visits)
                 .WithOne(v => v.Dependent)
                 .HasForeignKey(v => v.DependentId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Plan>()
+                .HasMany(p => p.Dependents)
+                .WithOne(d => d.Plan)
+                .HasForeignKey(d => d.PlanId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

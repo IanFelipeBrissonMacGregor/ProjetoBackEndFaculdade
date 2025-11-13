@@ -15,8 +15,12 @@ namespace ProjetoBackEnd.Api.Models
         public int PartnerId { get; set; }
 
         [JsonIgnore]
-        public Partner? Partner { get; set; }  // <- agora é opcional
+        public Partner? Partner { get; set; }
 
         public List<Visit> Visits { get; set; } = new();
+
+        public int? PlanId { get; set; }
+        public Plan? Plan { get; set; }
+
     }
 }
