@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore; // <== importante para usar Include
+using ProjetoBackEnd.Api.Data;
 using ProjetoBackEnd.Api.Models;
 using ProjetoBackEnd.Api.Repositories.Interfaces;
 using ProjetoBackEnd.Api.Services.Interfaces;
@@ -8,17 +10,50 @@ namespace ProjetoBackEnd.Api.Services
 {
     public class PartnerService : IPartnerService
     {
-        private readonly IPartnerRepository _repo;
-        public PartnerService(IPartnerRepository repo) => _repo = repo;
+        private readonly AppDbContext _context; // <== usar o DbContext diretamente aqui
 
-        public Task<Partner?> GetByIdAsync(int id) => _repo.GetByIdAsync(id);
-        public Task<IEnumerable<Partner>> GetAllAsync() => _repo.GetAllAsync();
+        public PartnerService(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Partner>> GetAllAsync()
+        {
+            return await _context.Partners
+                .Include(p => p.Dependents)
+                    .ThenInclude(d => d.Visits)
+                .ToListAsync();
+        }
+
+        public async Task<Partner?> GetByIdAsync(int id)
+        {
+            return await _context.Partners
+                .Include(p => p.Dependents)
+                    .ThenInclude(d => d.Visits)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public async Task<Partner> CreateAsync(Partner partner)
         {
-            await _repo.AddAsync(partner);
+            _context.Partners.Add(partner);
+            await _context.SaveChangesAsync();
             return partner;
         }
-        public Task UpdateAsync(Partner partner) => _repo.UpdateAsync(partner);
-        public Task DeleteAsync(int id) => _repo.DeleteAsync(id);
+
+        public async Task UpdateAsync(Partner partner)
+        {
+            _context.Partners.Update(partner);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var partner = await _context.Partners.FindAsync(id);
+            if (partner != null)
+            {
+                _context.Partners.Remove(partner);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

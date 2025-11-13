@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ProjetoBackEnd.Api.Models
 {
@@ -12,7 +13,10 @@ namespace ProjetoBackEnd.Api.Models
         public string Summary { get; set; } = string.Empty;
 
         public int PartnerId { get; set; }
-        public Partner Partner { get; set; } = null!;
-        public ICollection<Visit> Visits { get; set; } = new List<Visit>();
+
+        [JsonIgnore]
+        public Partner? Partner { get; set; }  // <- agora é opcional
+
+        public List<Visit> Visits { get; set; } = new();
     }
 }

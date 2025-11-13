@@ -16,14 +16,12 @@ namespace ProjetoBackEnd.Api.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Partner -> Dependent (1:N)
             modelBuilder.Entity<Partner>()
                 .HasMany(p => p.Dependents)
                 .WithOne(d => d.Partner)
                 .HasForeignKey(d => d.PartnerId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            // Dependent -> Visit (1:N)
+                
             modelBuilder.Entity<Dependent>()
                 .HasMany(d => d.Visits)
                 .WithOne(v => v.Dependent)

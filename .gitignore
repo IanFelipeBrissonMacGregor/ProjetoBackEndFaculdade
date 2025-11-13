@@ -1,0 +1,16 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio files
+*.user
+*.suo
+*.vscode/
+*.vs/
+
+# Database files
+*.db
+*.log
+
+# Rider IDE
+.idea/
