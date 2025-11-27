@@ -12,14 +12,12 @@ using ProjetoBackEnd.Api.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "API", Version = "v1" });
 
-    // Configuração do JWT no Swagger
     c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -46,35 +44,24 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-// ===============================
-// PostgreSQL connection
-// ===============================
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ===============================
-// Repositories
-// ===============================
+
 builder.Services.AddScoped<IPartnerRepository, PartnerRepository>();
 builder.Services.AddScoped<IDependentRepository, DependentRepository>();
 builder.Services.AddScoped<IVisitRepository, VisitRepository>();
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-// ===============================
-// Services
-// ===============================
+
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<IDependentService, DependentService>();
 builder.Services.AddScoped<IVisitService, VisitService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// ===============================
-// JWT Authentication
-// ===============================
 
-// LÊ EXATAMENTE O QUE TEM NO SEU appsettings.json
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var secretKey = jwtSettings.GetValue<string>("Key");
 
@@ -91,8 +78,8 @@ builder.Services
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,      // Não está usando issuer
-            ValidateAudience = false,    // Não está usando audience
+            ValidateIssuer = false,     
+            ValidateAudience = false,    
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
@@ -106,21 +93,17 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// ===============================
-// HTTP Pipeline
-// ===============================
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-// Middleware global de tratamento de exceções
 app.UseMiddleware<ApiExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-// AUTENTICAÇÃO + AUTORIZAÇÃO
 app.UseAuthentication();
 app.UseAuthorization();
 

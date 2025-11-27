@@ -11,7 +11,7 @@ namespace ProjetoBackEnd.Api.Data
         public DbSet<Partner> Partners { get; set; } = null!;
         public DbSet<Dependent> Dependents { get; set; } = null!;
         public DbSet<Visit> Visits { get; set; } = null!;
-        public DbSet<Plan> Plans { get; set; } = null!;    // NOVO
+        public DbSet<Plan> Plans { get; set; } = null!;  
         public DbSet<User> Users { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

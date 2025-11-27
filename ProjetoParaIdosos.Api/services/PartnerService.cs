@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore; // <== importante para usar Include
+using Microsoft.EntityFrameworkCore; 
 using ProjetoBackEnd.Api.Data;
 using ProjetoBackEnd.Api.Models;
 using ProjetoBackEnd.Api.Repositories.Interfaces;
@@ -10,7 +10,7 @@ namespace ProjetoBackEnd.Api.Services
 {
     public class PartnerService : IPartnerService
     {
-        private readonly AppDbContext _context; // <== usar o DbContext diretamente aqui
+        private readonly AppDbContext _context; 
 
         public PartnerService(AppDbContext context)
         {
