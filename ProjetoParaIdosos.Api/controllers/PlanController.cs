@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBackEnd.Api.Models;
 using ProjetoBackEnd.Api.Services.Interfaces;
 
 namespace ProjetoBackEnd.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PlanController : ControllerBase

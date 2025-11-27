@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoBackEnd.Api.Models;
 using ProjetoBackEnd.Api.Services.Interfaces;
@@ -5,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoBackEnd.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class PartnerController : ControllerBase

@@ -6,6 +6,9 @@ namespace ProjetoBackEnd.Api.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string Qualificação { get; set; } = string.Empty;
+
+        public string Certificações { get; set; } = string.Empty;
 
         public ICollection<Dependent> Dependents { get; set; } = new List<Dependent>();
     }
