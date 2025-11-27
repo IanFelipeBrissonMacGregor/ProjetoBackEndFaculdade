@@ -1,5 +1,6 @@
 # Projeto Back-End API (C# .NET)
 
+
 ##  Tecnologias
 - **Linguagem**: C#  
 - **Framework**: .NET (Web API)  
@@ -25,3 +26,67 @@ projeto-back-end/
 ├─ Exceptions/ # Tratamento de exceções
 ├─ appsettings.json # Configurações da aplicação
 └─ Program.cs # Ponto de entrada da aplicação
+
+
+# COLABORADORES:
+Ian Felipe Brisson Mac Gregor
+Gabriel Brisson Mac Gregor
+Lucas Cardoso da Silva
+João Machado Ribeiro
+Matheus Nascimento Marins
+
+🧩 Principais Funcionalidades
+🔐 Autenticação JWT
+
+Cadastro e login de usuários
+
+Geração de token JWT
+
+Controle de acesso às rotas protegidas
+
+Swagger configurado com suporte a Bearer Token
+
+👤 Parceiros (Partners)
+
+Representam cuidadores cadastrados no sistema
+
+Cada parceiro pode ter vários dependentes
+
+Endpoints CRUD completos
+
+🧓 Dependentes (Dependents)
+
+São os idosos assistidos
+
+Possuem informações como idade, saúde, condição e resumo
+
+Relacionados a um parceiro específico
+
+Endpoints CRUD completos
+
+📅 Visitas (Visits)
+
+Representam cada atendimento realizado ao idoso
+
+Contêm:
+
+Nome da visita
+
+Condições do dependente e ambiente
+
+Horário de início e fim
+
+Nota de satisfação
+
+Referência ao dependente
+
+Cada dependente possui sua lista de visitas
+
+💳 Planos (Plans)
+
+Planos mensais de acompanhamento (Bronze, Prata, Gold)
+
+Incluem nome, faixa de preço e benefícios
+
+Associados posteriormente aos parceiros 
+
