@@ -88,4 +88,5 @@ Planos mensais de acompanhamento (Bronze, Prata, Gold)
 
 Incluem nome, faixa de preço e benefícios
 
-Associados posteriormente aos parceiros
+Associados posteriormente aos parceiros 
+
