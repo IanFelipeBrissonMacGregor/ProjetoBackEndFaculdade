@@ -29,13 +29,13 @@ projeto-back-end/
 
 
 # COLABORADORES:
-Ian Felipe Brisson Mac Gregor
-Gabriel Brisson Mac Gregor
-Lucas Cardoso da Silva
-João Machado Ribeiro
-Matheus Nascimento Marins
+Ian Felipe Brisson Mac Gregor,
+Gabriel Brisson Mac Gregor,
+Lucas Cardoso da Silva,
+João Machado Ribeiro,
+Matheus Nascimento Marins,
 
-🧩 Principais Funcionalidades
+🧩 Principais Funcionalidades,
 🔐 Autenticação JWT
 
 Cadastro e login de usuários
